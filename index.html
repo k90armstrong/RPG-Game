@@ -5,12 +5,44 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="stylesheet" href="assets/css/resets.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/holder/2.9.4/holder.js"></script>
+    <link href="https://fonts.googleapis.com/css?family=PT+Sans|Ubuntu" rel="stylesheet">
+    <link rel="stylesheet" href="assets/css/reset.css">
     <link rel="stylesheet" href="assets/css/style.css">
-    <title>Document</title>
+
+    <title>Star Wars RPG</title>
 </head>
 
 <body>
+
+    <div class="clearfix">
+        <h1 class="right">Star Wars RPG Game</h1>
+    </div>
+    <div id="selectionArea">
+        <h2 class="bottom-border">Select Your Fighter</h2>
+        <div class="fighter">
+            <div class="title">Luke Skywalker</div>
+            <img src="holder.js/300x200" alt="" class="head-shot">
+            <div class="stat health">
+                Health:
+                <span class="health-value">140</span>
+            </div>
+            <div class="stat attackPower">
+                <span>Attack Power: </span>10</div>
+            <div class="stat counterAttackPower">
+                <span>Counter Attack Power: </span>10</div>
+        </div>
+    </div>
+    <div id="yourCharacter">
+        <h2 class="bottom-border">Your Character</h2>
+    </div>
+    <div id="enemiesLeft">
+        <h2 class="bottom-border">Enemies Available To Attack</h2>
+    </div>
+    <div id="fightSection">
+        <h2 class="bottom-border">Fighting Arena</h2>
+    </div>
+    <button id="attackButton">Attack</button>
 
 
 

@@ -1,0 +1,55 @@
+html, body {
+    margin: 0 auto;
+    width: 100%;
+}
+h1, h2, h3, h4, h5, h6 {
+    margin: 10px;
+    font-family: 'Ubuntu', sans-serif;
+}
+h1 {
+    font-size: 28px;
+}
+h2 {
+    font-size: 18px;
+}
+.container {
+
+}
+.stat {
+
+}
+.fighter {
+    border: solid;
+    border-color: grey;
+    border-width: 5px;
+    display: inline-block;
+    padding: 10px;
+    margin: 10px;
+    cursor: pointer;
+}
+.title {
+    text-align: center;
+    font-family: 'Ubuntu', sans-serif;
+    margin-bottom: 10px;
+}
+.stat {
+    margin-left: 10px;
+    font-family: 'PT Sans', sans-serif;
+}
+button {
+    margin: 10px;
+}
+.bottom-border {
+    border-bottom: solid;
+    border-bottom-color: grey;
+    border-bottom-width: 3px;
+}
+.right {
+    float: right;
+}
+.clearfix:after {
+    clear: both;
+    display: table;
+    content: "";
+}
+
