@@ -112,7 +112,6 @@ $(document).ready(function () {
     function moveFighterToArena($fighter) {
         fadeOut($fighter, function () {
             $yourFigtherSection.append($fighter.detach());
-            showOponentWeapon();
             $fighter.addClass('right');
             fadeIn($oponentLabel);
             fadeIn($fighter);
@@ -129,11 +128,12 @@ $(document).ready(function () {
     }
 
     function showOponentWeapon() {
-        $oponentWeapon = $('<div>').addClass("oponent-weapon-container right");
+        var $weaponCont = $('<div>').addClass("weapon-container right");
         var $img = $('<img>').attr('src', "assets/images/gun.jpg").addClass('weapon');
-        $oponentWeapon.append($img);
-        $yourFigtherSection.append($oponentWeapon);
-        fadeIn($oponentWeapon);
+        $weaponCont.on('click', userFiresWeapon);
+        $weaponCont.append($img);
+        $yourFigtherSection.append($weaponCont);
+        fadeIn($weaponCont);
     }
 
     function oponentFiresWeapon() {
@@ -157,11 +157,8 @@ $(document).ready(function () {
                     // oponent is dead
                     notInLastAttack = true;
                     inFight = false;
-                    fadeOut($oponentWeapon, function () {
-                        $oponentWeapon.remove();
-                    });
                     fadeOut(currentOponent.$view, function () {
-                        currentOponent.$view.detach();
+                        currentOponent.$view.remove();
                         currentOponent = undefined;
                     });
                 } else {
@@ -207,7 +204,6 @@ $(document).ready(function () {
     var $fightSection = $('#fightSection');
     var $attackButton = $('#attackButton');
     var $oponentLabel = $('.oponent-title');
-    var $oponentWeapon;
 
     // sounds
     var laserSound = new Audio('assets/sounds/Laser Blaster.mp3');

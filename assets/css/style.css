@@ -1,23 +1,31 @@
-html, body {
+html,
+body {
     margin: 0 auto;
     width: 100%;
 }
-h1, h2, h3, h4, h5, h6 {
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
     margin: 10px;
     font-family: 'Ubuntu', sans-serif;
 }
+
 h1 {
     font-size: 28px;
 }
+
 h2 {
     font-size: 18px;
 }
-.container {
 
-}
-.stat {
+.container {}
 
-}
+.stat {}
+
 .fighter {
     border: solid;
     border-color: grey;
@@ -25,31 +33,71 @@ h2 {
     display: inline-block;
     padding: 10px;
     margin: 10px;
+    margin-left: 50px;
+    margin-right: 50px;
     cursor: pointer;
+    transition: all 1s;
+    z-index: 1000;
 }
+
 .title {
     text-align: center;
     font-family: 'Ubuntu', sans-serif;
     margin-bottom: 10px;
 }
+
+.inline-block {
+    display: inline-block;
+}
+
 .stat {
     margin-left: 10px;
     font-family: 'PT Sans', sans-serif;
 }
+
 button {
     margin: 10px;
 }
+
 .bottom-border {
     border-bottom: solid;
     border-bottom-color: grey;
     border-bottom-width: 3px;
 }
+
 .right {
     float: right;
 }
+
 .clearfix:after {
     clear: both;
     display: table;
     content: "";
 }
 
+.head-shot {
+    height: 150px;
+    margin: 0 auto;
+}
+
+.display-none {
+    display: none;
+}
+
+img.weapon {
+    height: 50px;
+    cursor: pointer;
+}
+
+.weapon-container {
+    display: inline-block;
+    position: absolute;
+    top: 200px;
+}
+
+.oponent-weapon-container {
+    -webkit-transform: scaleX(-1);
+    transform: scaleX(-1);
+    display: inline-block;
+    top: 200px;
+}

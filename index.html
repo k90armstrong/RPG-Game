@@ -9,6 +9,8 @@
     <link href="https://fonts.googleapis.com/css?family=PT+Sans|Ubuntu" rel="stylesheet">
     <link rel="stylesheet" href="assets/css/reset.css">
     <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="assets/css/animate.css">
+
 
     <title>Star Wars RPG</title>
 </head>
@@ -18,31 +20,19 @@
     <div class="clearfix">
         <h1 class="right">Star Wars RPG Game</h1>
     </div>
-    <div id="selectionArea">
-        <h2 class="bottom-border">Select Your Fighter</h2>
-        <div class="fighter">
-            <div class="title">Luke Skywalker</div>
-            <img src="holder.js/300x200" alt="" class="head-shot">
-            <div class="stat health">
-                Health:
-                <span class="health-value">140</span>
-            </div>
-            <div class="stat attackPower">
-                <span>Attack Power: </span>10</div>
-            <div class="stat counterAttackPower">
-                <span>Counter Attack Power: </span>10</div>
+    <div class="display-none" id="selectionArea">
+        <div class="bottom-border">
+            <h2 class="section-title inline-block">Select Your Fighter</h2>
+            <h2 class="right oponent-title display-none">Oponent</h2>
         </div>
     </div>
-    <div id="yourCharacter">
-        <h2 class="bottom-border">Your Character</h2>
+    <div class="display-none" id="enemiesLeft">
+        <h2 class="bottom-border section-title">Enemies Available To Attack</h2>
     </div>
-    <div id="enemiesLeft">
-        <h2 class="bottom-border">Enemies Available To Attack</h2>
+    <div class="display-none" id="fightSection">
+        <h2 class="bottom-border section-title">Fighting Arena</h2>
     </div>
-    <div id="fightSection">
-        <h2 class="bottom-border">Fighting Arena</h2>
-    </div>
-    <button id="attackButton">Attack</button>
+    <button class="display-none" id="attackButton">Attack</button>
 
 
 
