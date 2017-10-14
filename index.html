@@ -20,15 +20,25 @@
     <div class="clearfix">
         <h1 class="right">Star Wars RPG Game</h1>
     </div>
-    <div class="display-none" id="selectionArea">
-        <div class="bottom-border">
-            <h2 class="section-title inline-block">Select Your Fighter</h2>
-            <h2 class="right oponent-title display-none">Oponent</h2>
+    <div id='playArea'>
+        <div class="display-none" id="selectionArea">
+            <div class="bottom-border">
+                <h2 class="section-title inline-block">Select Your Fighter</h2>
+                <h2 class="right oponent-title display-none">Oponent</h2>
+            </div>
+        </div>
+        <div class="display-none" id="enemiesLeft">
+            <h2 class="bottom-border section-title">Enemies Available To Attack</h2>
+        </div>
+
+        <div class="modal display-none">
+            <div class="modal-content">
+                <h2 class="modal-header">Well done, you are a true Jedi</h2>
+                <button id='playAgainButton'>Play Again!</button>
+            </div>
         </div>
     </div>
-    <div class="display-none" id="enemiesLeft">
-        <h2 class="bottom-border section-title">Enemies Available To Attack</h2>
-    </div>
+
 
 
     <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="

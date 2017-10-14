@@ -5,6 +5,8 @@ $(document).ready(function () {
     // http://jsfiddle.net/alex_netkachov/ZgBrK/ check this out for model view controller example
     class Fighter {
         constructor(name, health, attackPwr, counterAttackPwr) {
+            this.originalHealth = health;
+            this.originalAttackPower = attackPwr;
             this.name = name;
             this.health = health;
             this.attackPwr = attackPwr;
@@ -31,6 +33,12 @@ $(document).ready(function () {
         updateStats() {
             this.$view.find('.attackValue').text(this.attackPwr);
             this.$view.find('.healthValue').text(this.health);
+        }
+        resetFighter() {
+            this.health = this.originalHealth;
+            this.attackPwr = this.originalAttackPower;
+            this.updateStats();
+            this.$view.css('opacity', '1');
         }
     }
 
@@ -94,12 +102,13 @@ $(document).ready(function () {
         }
     }
 
-    function changeToStartGame() {
+    function changeToStartFight() {
         $yourFigtherSection.find('.section-title').text('Your Character');
         for (var i = 0; i < fighters.length; i++) {
             if (fighters[i] !== userCharacter) {
                 // move to enemies left section
                 console.log(fighters[i]);
+                oponents.push(fighters[i]);
                 var v = fighters[i].$view.detach();
                 $enemiesLeftSection.append(v);
             }
@@ -120,12 +129,12 @@ $(document).ready(function () {
     }
 
     function showUserWeapon() {
-        var $weaponCont = $('<div>').addClass("weapon-container");
+        $userWeapon = $('<div>').addClass("weapon-container");
         var $img = $('<img>').attr('src', "assets/images/gun.jpg").addClass('weapon');
-        $weaponCont.on('click', userFiresWeapon);
-        $weaponCont.append($img);
-        $yourFigtherSection.append($weaponCont);
-        fadeIn($weaponCont);
+        $userWeapon.on('click', userFiresWeapon);
+        $userWeapon.append($img);
+        $yourFigtherSection.append($userWeapon);
+        fadeIn($userWeapon);
     }
 
     function showOponentWeapon() {
@@ -143,7 +152,36 @@ $(document).ready(function () {
         fighterHit(userCharacter.$view, function () {
             console.log('user hit!');
             notInLastAttack = true;
+            if (!userCharacter.isAlive()) {
+                // user loses
+                showLoserModal();
+                console.log('you lost!');
+                userWon = false;
+                // change to show the loser screen
+            }
         });
+
+    }
+
+    function allDead() {
+        // check to see if the oponents are dead
+        for (var i = 0; i < oponents.length; i++) {
+            if (oponents[i].isAlive()) {
+                return false
+            }
+        }
+        return true
+    }
+
+    function showWinnerModal() {
+        console.log('open winner modal');
+        $modalHeader.text(winMessage);
+        fadeIn($modal);
+    }
+
+    function showLoserModal() {
+        $modalHeader.text(loseMessage);
+        fadeIn($modal);
     }
 
     function userFiresWeapon() {
@@ -163,16 +201,19 @@ $(document).ready(function () {
                     fadeOut(currentOponent.$view, function () {
                         currentOponent.$view.detach();
                         currentOponent = undefined;
+                        // check if all oponenets are dead
+                        if (allDead()) {
+                            // change to show the winner screen
+                            userWon = true;
+                            showWinnerModal();
+                        }
                     });
                 } else {
                     oponentFiresWeapon();
                 }
             });
-            if (!userCharacter.isAlive()) {
-                // user loses
-                console.log('you lost!');
-            }
         }
+
     }
 
 
@@ -200,6 +241,10 @@ $(document).ready(function () {
     var userCharacter;
     var currentOponent;
     notInLastAttack = true;
+    var userWon;
+    var oponents = [];
+    var winMessage = 'Congratulations! You have won! You are a true Jedi!';
+    var loseMessage = 'It looks like the Darkside was too powerful for you, but you can test your skills again!'
 
     // jquery element variables here
     var $yourFigtherSection = $('#selectionArea');
@@ -208,6 +253,10 @@ $(document).ready(function () {
     var $attackButton = $('#attackButton');
     var $oponentLabel = $('.oponent-title');
     var $oponentWeapon;
+    var $userWeapon;
+    var $modal = $('.modal');
+    var $modalHeader = $('.modal-header');
+    var $playArea = $('#playArea');
 
     // sounds
     var laserSound = new Audio('assets/sounds/Laser Blaster.mp3');
@@ -218,7 +267,7 @@ $(document).ready(function () {
         if (startOfGame) {
             startOfGame = false;
             userCharacter = getFighter($(this));
-            fadeOut($yourFigtherSection, changeToStartGame);
+            fadeOut($yourFigtherSection, changeToStartFight);
         } else if (!inFight && getFighter($(this)) !== userCharacter) {
             // user can pick a new oponent
             currentOponent = getFighter($(this));
@@ -231,11 +280,37 @@ $(document).ready(function () {
         console.log(currentOponent);
     });
 
+    $('#playAgainButton').on('click', function () {
+        inFight = false;
+        startOfGame = true;
+        oponents = [];
+
+        fadeOut($playArea, function () {
+            // move all fighters to the selection area
+            for (var i = 0; i < fighters.length; i++) {
+                fighters[i].$view.removeClass('right');
+                fighters[i].resetFighter();
+                var $fi = fighters[i].$view.detach();
+                // $fi.removeClass('right');
+                $yourFigtherSection.append($fi);
+            }
+            // remove the oponent label
+            $oponentWeapon.remove();
+            $userWeapon.remove();
+            $oponentLabel.addClass('display-none');
+            $enemiesLeftSection.addClass('display-none');
+            $modal.addClass('display-none');
+            $yourFigtherSection.find('.section-title').text('Select Your Fighter');
+            fadeIn($playArea);
+        });
+
+    });
+
 
     // main process
     // wait 5 sesonds and bring in the choose your fighter
     setTimeout(function () {
         fadeIn($yourFigtherSection);
-    }, 1000);
+    }, 500);
 
 });
